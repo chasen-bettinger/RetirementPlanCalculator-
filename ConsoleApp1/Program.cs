@@ -26,11 +26,11 @@ namespace ConsoleApp1
             var wealthEachYear = CalculateWealthLeft(totalSavings);
 
             // Print the amount of wealth the individual has per year
-            Amoritize(wealthEachYear);
+            Amortize(wealthEachYear);
             Console.Read();
         }
 
-        private static void Amoritize(ArrayList wealthEachYear)
+        private static void Amortize(ArrayList wealthEachYear)
         {
             Console.WriteLine("");
             // The current year
