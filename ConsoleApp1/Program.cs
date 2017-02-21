@@ -34,7 +34,7 @@ namespace ConsoleApp1
         {
             Console.WriteLine("");
             // The current year
-            int year = 1;
+            int year = 0;
             foreach(double wealth in wealthEachYear)
             {
                 Console.WriteLine($"Year: {year} - ${wealth:N}");
@@ -45,9 +45,9 @@ namespace ConsoleApp1
         private static ArrayList CalculateWealthLeft(double totalSavings)
         {
             ArrayList wealthPerYear = new ArrayList();
-            double interest = 0.03, savings = totalSavings, interestEarned;
+            double savings = totalSavings, interestEarned;
             int year = 0;
-            const double MONEY_SPENT = 50000.00;
+            const double MONEY_SPENT = 50000.00, INTEREST = 0.03;
             
 
             while(year <= 40 && savings > 0)
@@ -59,7 +59,7 @@ namespace ConsoleApp1
                 savings = (savings - MONEY_SPENT);
 
                 // Calcuate the interest based on the amount of money you have after expenses are taken out
-                interestEarned = savings * interest;
+                interestEarned = savings * INTEREST;
 
                 // Add the interest earning to the savings account
                 savings += interestEarned;
