@@ -25,7 +25,7 @@ namespace ConsoleApp1
             // and interest has been added
             var wealthEachYear = CalculateWealthLeft(totalSavings);
 
-            Console.WriteLine("");
+            Console.WriteLine(" ");
 
             // Print the amount of wealth the individual has per year
             Amortize(wealthEachYear);
