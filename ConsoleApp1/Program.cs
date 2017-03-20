@@ -10,20 +10,22 @@ namespace ConsoleApp1
     class Program
     {
         static void Main(string[] args)
-        {  
+        {
             // Read the number of years remaining the individual has to work
-            var yearsReamining = ReadIntInput("How many working years do you have remaining in your career?");
+            var yearsRemaining = ReadIntInput("How many working years do you have remaining in your career?");
 
             // Read the amount of money the individual can put aside in their savings account
             var annualSavings = ReadDoubleInput("What is the annual amount of money that you can save?");
 
             // Calculate the total amount of savings using the years remaining in a person's career and the 
             // annual savings amount they can put forth
-            var totalSavings = CalculateSavings(yearsReamining, annualSavings);
+            var totalSavings = CalculateSavings(yearsRemaining, annualSavings);
 
             // Calculate the amount of wealth each year after their annual expenses have been taken out
             // and interest has been added
             var wealthEachYear = CalculateWealthLeft(totalSavings);
+
+            Console.WriteLine("");
 
             // Print the amount of wealth the individual has per year
             Amortize(wealthEachYear);
@@ -32,10 +34,11 @@ namespace ConsoleApp1
 
         private static void Amortize(ArrayList wealthEachYear)
         {
-            Console.WriteLine("");
+
             // The current year
             int year = 0;
-            foreach(double wealth in wealthEachYear)
+
+            foreach (double wealth in wealthEachYear)
             {
                 Console.WriteLine($"Year: {year} - ${wealth:N}");
                 year++;
@@ -48,9 +51,9 @@ namespace ConsoleApp1
             double savings = totalSavings, interestEarned;
             int year = 0;
             const double MONEY_SPENT = 50000.00, INTEREST = 0.03;
-            
 
-            while(year <= 40 && savings > 0)
+
+            while (year <= 40 && savings > 0)
             {
                 // Add the amount of money we currently have to the ArrayList "wealthPerYear"
                 wealthPerYear.Add(savings);
@@ -70,9 +73,19 @@ namespace ConsoleApp1
             return wealthPerYear;
         }
 
-        private static double CalculateSavings(int yearsReamining, double annualSavings)
+        private static double CalculateSavings(int yearsRemaining, double annualSavings)
         {
-            return (double) yearsReamining * annualSavings;
+            const double INTEREST_RATE = 0.03;
+            double savings = 0.00;
+
+            while (yearsRemaining > 0)
+            {
+                savings += annualSavings;
+                savings += annualSavings += INTEREST_RATE;
+                yearsRemaining -= 1;
+            }
+
+            return savings;
         }
 
         private static int ReadIntInput(string message)
@@ -82,11 +95,11 @@ namespace ConsoleApp1
 
             Console.WriteLine(message);
 
-            while(!isValid || output < 0)
+            while (!isValid || output < 0)
             {
                 isValid = int.TryParse(Console.ReadLine(), out output);
 
-                if(!isValid || output < 0)
+                if (!isValid || output < 0)
                 {
                     Console.WriteLine("Please enter a valid positive integer\n");
                     Console.WriteLine(message);
